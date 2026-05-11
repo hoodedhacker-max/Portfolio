@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bertin | VVA Digital Media Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --gray: #8a8a8a;
+      --dark-gray: #2a2a2a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: 'VVA';
+      position: absolute;
+      right: -2rem; bottom: -3rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22rem;
+      font-weight: 700;
+      color: rgba(201,168,76,0.04);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 300;
+      line-height: 0.95;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .hero-desc {
+      max-width: 500px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.7);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* DIVIDER */
+    .gold-line {
+      width: 60px; height: 2px;
+      background: var(--gold);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* SECTION BASE */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    #about .section-label { color: var(--gold); }
+    #about .section-title { color: var(--navy); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-bio {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .about-bio p { margin-bottom: 1.2rem; }
+
+    .resume-box {
+      background: var(--navy);
+      color: var(--cream);
+      padding: 2.5rem;
+    }
+
+    .resume-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .resume-item {
+      border-left: 2px solid var(--gold);
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .resume-item h4 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .resume-item p {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.6);
+    }
+
+    /* PROJECTS */
+    #projects {
+      background: #0d1e35;
+    }
+
+    .projects-intro {
+      max-width: 600px;
+      color: rgba(245,240,232,0.65);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .video-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.5);
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: 1.2rem 1.4rem;
+    }
+
+    .video-number {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .video-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .video-desc {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.6;
+    }
+
+    /* FAITH */
+    #faith {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #faith::before {
+      content: '✝';
+      position: absolute;
+      right: 4rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 18rem;
+      color: rgba(201,168,76,0.04);
+      pointer-events: none;
+    }
+
+    .faith-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .faith-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2.5rem;
+    }
+
+    .faith-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .faith-card p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.7);
+    }
+
+    .scripture {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 3px solid var(--gold);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.55);
+    }
+
+    /* TESTIMONIALS */
+    #testimonials {
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    #testimonials .section-label { color: var(--gold); }
+    #testimonials .section-title { color: var(--navy); }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--navy);
+      color: var(--cream);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem; left: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      margin-top: 1rem;
+      color: rgba(245,240,232,0.8);
+    }
+
+    .testimonial-author {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-pitch {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.65);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-cta {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .contact-cta:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .contact-info {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-info-item {
+      text-align: center;
+    }
+
+    .contact-info-label {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-info-value {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.7);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #060f1c;
+      text-align: center;
+      padding: 2rem 4rem;
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.3);
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+
+    footer span { color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.75rem; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .faith-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">BERTIN</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#faith">Faith</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <p class="hero-tag">VVA Digital Media Portfolio</p>
+    <h1>Hello, I'm<br/><span>Bertin.</span></h1>
+    <p class="hero-desc">
+      A digital media student at VVA with a passion for storytelling, creativity, and using technology to serve and glorify God. This portfolio represents my journey — academically, creatively, and spiritually.
+    </p>
+    <a href="#projects" class="hero-cta">View My Work</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p>
+          My name is Bertin, and I am a digital media student at VVA. Over the course of this program, I have developed a strong foundation in video production, storytelling, and visual communication. I believe that creativity is a gift from God, and I am committed to using it with excellence and purpose.
+        </p>
+        <p>
+          Through this portfolio, I hope to showcase not only my technical growth but also my personal and spiritual development. Each project reflects my commitment to doing all things wholeheartedly, as unto the Lord. My goal is to use digital media as a platform to inspire, connect, and serve my community.
+        </p>
+        <p>
+          <em>[Replace this placeholder bio with your own 100–150 word bio before submitting.]</em>
+        </p>
+      </div>
+      <div class="resume-box">
+        <h3>Resume Highlights</h3>
+        <div class="resume-item">
+          <h4>Digital Media Production</h4>
+          <p>Video editing, storytelling, visual design — VVA</p>
+        </div>
+        <div class="resume-item">
+          <h4>Leadership</h4>
+          <p>[Add any leadership roles, clubs, or positions here]</p>
+        </div>
+        <div class="resume-item">
+          <h4>Community Service</h4>
+          <p>[Add service projects or volunteer work here]</p>
+        </div>
+        <div class="resume-item">
+          <h4>Tools & Skills</h4>
+          <p>Video editing, Canva, Google Sites, storytelling, scriptwriting</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">My Work</p>
+    <h2 class="section-title">VVA Projects</h2>
+    <p class="projects-intro">
+      The following videos represent my strongest digital media work from this course. Each piece was created to showcase the vision, culture, and excellence of VVA — produced with intentionality and care.
+    </p>
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1IKUB7fontOo0gvTVH1wlhAG6MS31mzXF/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 01</p>
+          <h3 class="video-title">VVA Showcase — Vol. 1</h3>
+          <p class="video-desc">A fun Christmas Short</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1h9C5mNYLTEpZyFpMuZ5cwXtgAXGCW_qt/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 02</p>
+          <h3 class="video-title">VVA Showcase — Vol. 2</h3>
+          <p class="video-desc">A digital media production showing the highlights of the second service project of the 25-26 school year</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1jFNaDsS_BO9kKrLGl9gYsdKLjdLvrq1X/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 03</p>
+          <h3 class="video-title">VVA Showcase — Vol. 3</h3>
+          <p class="video-desc">A digital media production showcasing our VVA Bible Club</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1oQOUQV1KFarilMKEkV-cLimh7lK2OYQi/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 04</p>
+          <h3 class="video-title">VVA Showcase — Vol. 4</h3>
+          <p class="video-desc">A digital media production highlighting the the VVA Family</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1pAnaERIHqF7EJa0c9XRAVd33FIhM9s66/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 05</p>
+          <h3 class="video-title">VVA Showcase — Vol. 5</h3>
+          <p class="video-desc">A digital media production that serves as a short showcasing our school.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1v12z-rP64Uo3ks54FEGQqy3m4Z_x1VcG/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 06</p>
+          <h3 class="video-title">VVA Showcase — Vol. 6</h3>
+          <p class="video-desc">A digital media production inviting people who are willing to teach.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/1voPdm6DFmpfQBQ6ERc4Nn6jlssX8K7kQ/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-number">Project 07</p>
+          <h3 class="video-title">VVA Showcase — Vol. 7</h3>
+          <p class="video-desc">A digital media production highlighting the VVA family.</div> </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAITH -->
+  <section id="faith">
+    <p class="section-label">Reflection & Faith</p>
+    <h2 class="section-title">Growing Through<br/>Digital Media</h2>
+    <div class="faith-grid">
+      <div class="faith-card">
+        <h3>My Testimony</h3>
+        <p>
+          Digital media has given me a platform to tell stories that matter. Through this course, I have learned that creativity is not just a skill — it is a calling. God has placed gifts in each of us, and this portfolio is my way of honoring Him by using mine with excellence and purpose.
+        </p>
+        <p style="margin-top:1rem;">
+          [Replace this with your personal testimony — how digital media helped you grow or serve others.]
+        </p>
+        <div class="scripture">
+          "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters." — Colossians 3:23
+        </div>
+      </div>
+      <div class="faith-card">
+        <h3>Creative & Spiritual Growth</h3>
+        <p>
+          This journey has shaped me academically, creatively, and spiritually. I have grown in confidence, in craft, and in my understanding of what it means to serve others through my gifts. Every video, every edit, every story told was an act of stewardship.
+        </p>
+        <p style="margin-top:1rem;">
+          [Add your own reflection on how you have grown creatively, academically, and spiritually.]
+        </p>
+        <div class="scripture">
+          "Each of you should use whatever gift you have received to serve others, as faithful stewards of God's grace in its various forms." — 1 Peter 4:10
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <p class="section-label">What Others Say</p>
+    <h2 class="section-title">Testimonials</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          Bertin consistently brings dedication and creativity to every project. His work reflects a genuine passion for storytelling and a commitment to excellence that is truly inspiring to see in a young media student.
+        </p>
+        <p class="testimonial-author">— Teacher / Mentor [Replace with real name]</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          Working alongside Bertin on media projects showed me what it looks like to pursue your craft with both skill and integrity. His videos for VVA captured the heart of our school beautifully.
+        </p>
+        <p class="testimonial-author">— Peer / Classmate [Replace with real name]</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          [Add a third testimonial from a teacher, peer, or community member here. This could also be a personal reflection on your own growth throughout the course.]
+        </p>
+        <p class="testimonial-author">— [Name & Role]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Let's Connect</p>
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="contact-pitch">
+        My work is driven by purpose and passion. Whether you want to collaborate, connect, or simply learn more about what I do — I would love to hear from you. Let's create something meaningful together.
+      </p>
+      <a href="mailto:smiley.bertin@gmail.com" class="contact-cta">Send a Message</a>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <p class="contact-info-label">School</p>
+          <p class="contact-info-value">VVA</p>
+        </div>
+        <div class="contact-info-item">
+          <p class="contact-info-label">Email</p>
+          <p class="contact-info-value">smiley.bertin@gmail.com</p>
+        </div>
+        <div class="contact-info-item">
+          <p class="contact-info-label">Focus</p>
+          <p class="contact-info-value">Digital Media</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>Bertin</span> · VVA Digital Media Portfolio · Built with purpose.</p>
+  </footer>
+
+</body>
+</html>
